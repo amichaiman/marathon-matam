@@ -14,6 +14,7 @@ typedef struct{
 Node *addNode(Node *curNode, int key);
 void printTree(Node *curNode);
 int isOrderTree(Node *curNode);
+Node *findMaxInOrderTree(Node *curNode);
 
 int main(){
     List l;
@@ -28,7 +29,7 @@ int main(){
     l.head = &n7;
 
     printf("the tree is%s an ordered tree\n", isOrderTree(l.head) ? "" : " not");
-
+    printf("max node is %d\n", findMaxInOrderTree(l.head)->key);
     return 0;
 }
 
@@ -56,6 +57,16 @@ int isOrderTree(Node *curNode){
     /*  check if both kid trees are also ordered  */
     return isOrderTree(curNode->left) && isOrderTree(curNode->right);
 }
+/*  input: tree
+ *  output: maximum node
+ * */
+Node *findMaxInOrderTree(Node *curNode) {
+    if (!curNode->right){
+        return curNode;
+    }
+    return findMaxInOrderTree(curNode->right);
+}
+
 
 Node *addNode(Node *curNode, int key) {
     if (!curNode){
@@ -82,3 +93,4 @@ void printTree(Node *curNode){
     printf("%d\t",curNode->key);
     printTree(curNode->right);
 }
+
