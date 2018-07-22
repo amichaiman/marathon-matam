@@ -61,10 +61,13 @@ int isOrderTree(Node *curNode){
  *  output: maximum node
  * */
 Node *findMaxInOrderTree(Node *curNode) {
-    if (!curNode->right){
+    if (!curNode->right && !curNode->left){
         return curNode;
     }
-    return findMaxInOrderTree(curNode->right);
+    int maxLeft = findMaxInOrderTree(curNode->left);
+    int maxRight = findMaxInOrderTree(curNode->right);
+
+    return maxLeft > maxRight ? maxLeft : maxRight;
 }
 
 

@@ -35,8 +35,18 @@ int main(int argc, char **argv) {
         if (strstr(line,argv[2]) != NULL) {
             /*  check if we are in first half or second */
             if (ftell(fp) < fileLen/2){
+                /*  check if the sentence appears twice in first half   */
+                if (foundSentence[0]){
+                    printf("sentence appears twice in first half\n");
+                    return 0;
+                }
                 foundSentence[0] = TRUE;
             } else {
+                /*  check if the sentence appears twice in first half   */
+                if (foundSentence[1]){
+                    printf("sentence appears twice in second half\n");
+                    return 0;
+                }
                 foundSentence[1] = TRUE;
             }
         }

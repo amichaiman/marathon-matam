@@ -47,15 +47,15 @@ int symmetricCount(Node *curNode, int *height){
     int heightLeft=0, heightRight=0;
     int symCount = 0;
 
-    symCount = symmetricCount(curNode->right,&heightRight);
-    symCount += symmetricCount(curNode->left,&heightLeft);
+    int symCountRight = symmetricCount(curNode->right,&heightRight);
+    int symCountLeft = symmetricCount(curNode->left,&heightLeft);
 
 
     if (height != NULL){
         *height = (heightLeft > heightRight ? heightLeft : heightRight) + 1;
     }
 
-    return symCount + (heightLeft==heightRight);
+    return symCountLeft + symCountRight + (heightLeft==heightRight);
 }
 
 Node *addNode(Node *curNode, int key) {

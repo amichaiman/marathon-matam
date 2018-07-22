@@ -39,15 +39,15 @@ int main(){
  *  output: 1 if trees are identical. 0 otherwise.
  * */
 int isSameTree(Node* curNode1, Node* curNode2){
-    if (!curNode1 && !curNode2 || !curNode1 || !curNode2){
+    if (!curNode1 && !curNode2){
         return 1;
     }
 
-    if (curNode1->key != curNode2->key){
+    if (!curNode1 || !curNode2 || curNode1->key != curNode2->key){
         return 0;
     }
 
-    return isSameTree(curNode1->left,curNode2->left) && isSameTree(curNode2->right, curNode2->right);
+    return isSameTree(curNode1->left,curNode2->left) && isSameTree(curNode1->right, curNode2->right);
 }
 
 

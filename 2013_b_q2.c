@@ -130,15 +130,24 @@ void createList1(List *l) {
     addNode(l,7);
 }
 
-/*  adds node to beginning of list
+/*  adds node to end of list
  * */
 void addNode(List *l, int key){
     Node *newNode = (Node*) malloc (sizeof(Node));
+    Node *curNode = l->head;
+
     newNode->key = key;
     newNode->next = NULL;
 
-    newNode->next = l->head;
-    l->head = newNode;
+    if (!curNode){
+        l->head = newNode;
+        return;
+    }
+
+    while (curNode->next){
+        curNode = curNode->next;
+    }
+    curNode->next = newNode;
 }
 
 void printList(Node* curNode){
