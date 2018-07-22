@@ -11,7 +11,8 @@ int main() {
     int input;
 
     printf("enter N value (just a number):\n");
-    scanf("%d",&input); //input is an integer -> 4 bytes, if input is 135
+    scanf("%d",&input); //input is an integer -> 4 bytes, if input is 135 then it's binary form is:
+                        //00000000 0000000 0000000 10000111
 
 
     play_game(input);
