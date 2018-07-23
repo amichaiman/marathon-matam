@@ -15,14 +15,36 @@ int main(){
 }
 
 unsigned int permute(unsigned int n, int *permutation){
-    unsigned int res = 0;
     int i;
+    int newNum = 0;
+    int bitToAdd = 0;
+    //  000..000 1010 0010
+    //  n>>1
+    //  000..000 0101 0001
+    // &000..000 0000 0001
+    //  000..000 0000 0000
+    // |000..000 0000 0001
 
-    for (i=BITS_IN_BYTE*sizeof(int)-1; i>0; i--){
-        /*  add the bit that is in location permutation[i] */
-        res |= n>>permutation[i]&0x1;
-        res <<= 1;
+    for (i=0; i<BITS_IN_BYTE*sizeof(int); i++){
+        bitToAdd = getBit(n, permutation[i]);
+        newNum = setBit(newNum, i, bitToAdd);
     }
 
-    return res;
+    return newNum;
+}
+
+
+int setBit(int c, int i, int val){
+    int mask = 1 << i;
+    if(val == 1){
+        return c | mask;
+    } else {
+        return c & ~mask;
+    }
+}
+
+int getBit(int c, int i){
+    int mask = 1 << i;
+
+    return (c&mask) >> i;
 }
